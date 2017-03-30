@@ -1,23 +1,15 @@
 The content below is an example project proposal / requirements document. Replace the text below the lines marked "__TODO__" with details specific to your project. Remove the "TODO" lines.
 
-(___TODO__: your project name_)
-
-# Shoppy Shoperson 
+# FitClub 
 
 ## Overview
 
-(___TODO__: a brief one or two paragraph, high-level description of your project_)
-
-Remembering what to buy at the grocery store is waaaaay too difficult. Also, shopping for groceries when you're hungry leads to regrettable purchases. Sooo... that's where Shoppy Shoperson comes in!
-
-Shoppy Shoperson is a web app that will allow users to keep track of multiple grocery lists. Users can register and login. Once they're logged in, they can create or view their grocery list. For every list that they have, they can add items to the list or cross off items.
+FitClub is a web-based application which is part workout tracker and part social game motivating users to push themselves and take on fitness challenges.  Users start at Level 1 and earn points for workouts and bonuses for meeting set goals which unlock achievements to reach the next Level while competing against other users for top ranking.  Routines have different rewards depending on difficulty which is motivating for the user.  FitClub community members are able to post comments on their workouts or achievements and other users can respond and provide motivation and inspiration.
 
 
 ## Data Model
 
-(___TODO__: a description of your application's data and their relationships to each other_) 
-
-The application will store Users, Lists and Items
+The application will store Users, Lists and have a comment section and Items
 
 * users can have multiple lists (via references)
 * each list can have multiple items (by embedding)
@@ -28,7 +20,7 @@ An Example User:
 
 ```javascript
 {
-  username: "shannonshopper",
+  username: "mikeymacho",
   hash: // a password hash,
   lists: // an array of references to List documents
 }
@@ -39,10 +31,10 @@ An Example List with Embedded Items:
 ```javascript
 {
   user: // a reference to a User object
-  name: "Breakfast foods",
+  name: "Cardio Routine",
   items: [
-    { name: "pancakes", quantity: "9876", checked: false},
-    { name: "ramen", quantity: "2", checked: true},
+    { name: "running", length: "60", checked: false},
+    { name: "swimming", length: "120", checked: false},
   ],
   createdAt: // timestamp
 }
@@ -77,14 +69,12 @@ Here's a [complex example from wikipedia](https://upload.wikimedia.org/wikipedia
 
 ## User Stories or Use Cases
 
-(___TODO__: write out how your application will be used through [user stories](http://en.wikipedia.org/wiki/User_story#Format) and / or [use cases](https://www.mongodb.com/download-center?jmp=docs&_ga=1.47552679.1838903181.1489282706#previous)_)
-
 1. as non-registered user, I can register a new account with the site
 2. as a user, I can log in to the site
-3. as a user, I can create a new grocery list
-4. as a user, I can view all of the grocery lists I've created in a single list
-5. as a user, I can add items to an existing grocery list
-6. as a user, I can cross off items in an existing grocery list
+3. as a user, I can create a new Excercise routine
+4. as a user, I can view all of the excercise routines I've created in a single list
+5. as a user, I can add items to an existing excerices routine
+6. as a user, I can check off items that I have completed for that week in an existing excercise routine
 
 ## Research Topics
 
@@ -92,16 +82,10 @@ Here's a [complex example from wikipedia](https://upload.wikimedia.org/wikipedia
 
 * (5 points) Integrate user authentication
     * I'm going to be using passport for user authentication
-    * And account has been made for testing; I'll email you the password
-    * see <code>cs.nyu.edu/~jversoza/ait-final/register</code> for register page
-    * see <code>cs.nyu.edu/~jversoza/ait-final/login</code> for login page
 * (4 points) Perform client side form validation using a JavaScript library
-    * see <code>cs.nyu.edu/~jversoza/ait-final/my-form</code>
-    * if you put in a number that's greater than 5, an error message will appear in the dom
-* (5 points) vue.js
-    * used vue.js as the frontend framework; it's a challenging library to learn, so I've assigned it 5 points
+    * if you put in an excercise alreader in that routine, an error message will appear in the dom
 
-10 points total out of 8 required points (___TODO__: addtional points will __not__ count for extra credit_)
+9 points total out of 8 required points 
 
 
 ## [Link to Initial Main Project File](app.js) 
@@ -110,7 +94,4 @@ Here's a [complex example from wikipedia](https://upload.wikimedia.org/wikipedia
 
 ## Annotations / References Used
 
-(___TODO__: list any tutorials/references/etc. that you've based your code off of_)
-
 1. [passport.js authentication docs](http://passportjs.org/docs) - (add link to source code that was based on this)
-2. [tutorial on vue.js](https://vuejs.org/v2/guide/) - (add link to source code that was based on this)
