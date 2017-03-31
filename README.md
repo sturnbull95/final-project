@@ -42,7 +42,7 @@ An Example List with Embedded Items:
 
 /list/create - homepage
 
-![ScreenShot](https://raw.github.com/smt430/smt430-final-project/documentation/FitClub - Home Page.png)
+![ScreenShot](https://raw.github.com/smt430-final-project/documentation/FitClub - Home Page.png)
 
 
 /list - page for showing account
