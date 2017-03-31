@@ -61,7 +61,7 @@ An Example List with Embedded Items:
 
 (___TODO__: draw out a site map that shows how pages are related to each other_)
 
-Here's a [Fitclub Site Map (jpeg).png](smt430-final-project/documentation/Fitclub Site Map (jpeg).png), but you can create one without the screenshots, drop shadows, etc. ... just names of pages and where they flow to.
+Here's a ![Fitclub Site Map (jpeg).png](smt430-final-project/documentation/Fitclub Site Map (jpeg).png), but you can create one without the screenshots, drop shadows, etc. ... just names of pages and where they flow to.
 
 ## User Stories or Use Cases
 
