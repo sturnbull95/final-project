@@ -12,8 +12,6 @@ The application will store Users, Lists and have a comment section and Items
 * users can have multiple lists (via references)
 * each list can have multiple items (by embedding)
 
-(___TODO__: sample documents_)
-
 An Example User:
 
 ```javascript
@@ -34,30 +32,30 @@ An Example List with Embedded Items:
     { name: "running", length: "60", checked: false},
     { name: "swimming", length: "120", checked: false},
   ],
-  createdAt: // timestamp
 }
 ```
 
 
 ## [Link to Commented First Draft Schema](db.js) 
 
-(___TODO__: create a first draft of your Schemas in db.js and link to it_)
-
 ## Wireframes
 
-(___TODO__: wireframes for all of the pages on your site; they can be as simple as photos of drawings or you can use a tool like Balsamiq, Omnigraffle, etc._)
+/list/create - homepage
 
-/list/create - page for creating a new shopping list
+![homepage](documentation/homepage.png)
 
-![list create](documentation/list-create.png)
+/list - page for showing account
 
-/list - page for showing all shopping lists
+![myAccount](documentation/myAccount.png)
 
-![list](documentation/list.png)
+/list/slug - page for showing comment section
 
-/list/slug - page for showing specific shopping list
+![socialFeed](documentation/socialFeed.png)
 
-![list](documentation/list-slug.png)
+
+![trackExcercise](documentation/trackExcerise.png)
+
+![dashboard](documentation/dashboard.png)
 
 ## Site map
 
@@ -76,8 +74,6 @@ Here's a [complex example from wikipedia](https://upload.wikimedia.org/wikipedia
 
 ## Research Topics
 
-(___TODO__: the research topics that you're planning on working on along with their point values... and the total points of research topics listed_)
-
 * (5 points) Integrate user authentication
     * I'm going to be using passport for user authentication
 * (4 points) Perform client side form validation using a JavaScript library
@@ -87,8 +83,6 @@ Here's a [complex example from wikipedia](https://upload.wikimedia.org/wikipedia
 
 
 ## [Link to Initial Main Project File](app.js) 
-
-(___TODO__: create a skeleton Express application with a package.json, app.js, views folder, etc. ... and link to your initial app.js_)
 
 ## Annotations / References Used
 
