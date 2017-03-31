@@ -42,27 +42,25 @@ An Example List with Embedded Items:
 
 /list/create - homepage
 
-![ScreenShot](https://raw.github.com/smt430-final-project/documentation/FitClub - Home Page.png)
+Cannot figure out how to make the link, will find out for next time, but homeScreen is in  documentation
 
 
 /list - page for showing account
 
-![myAccount](documentation/myAccount.png)
+myAccount is in documentation
 
 /list/slug - page for showing comment section
 
-![socialFeed](documentation/socialFeed.png)
+socialFeed is in documentation
 
 
-![trackExcercise](documentation/trackExcerise.png)
+trackExcercise is in documentation
 
-![dashboard](documentation/dashboard.png)
+dashboard is in documentation
 
 ## Site map
 
-(___TODO__: draw out a site map that shows how pages are related to each other_)
-
-Here's a ![Fitclub Site Map (jpeg).png](smt430-final-project/documentation/Fitclub Site Map (jpeg).png), but you can create one without the screenshots, drop shadows, etc. ... just names of pages and where they flow to.
+Linking is not working but site map is in documentation
 
 ## User Stories or Use Cases
 
@@ -88,3 +86,9 @@ Here's a ![Fitclub Site Map (jpeg).png](smt430-final-project/documentation/Fitcl
 ## Annotations / References Used
 
 1. [passport.js authentication docs](http://passportjs.org/docs) - (add link to source code that was based on this)
+
+2. Research creating a Social Feed
+* What?   The social feed message board is the component of FitClub which allows the users to connect through posting comments and uploading fitness related photos
+*  Why?  It is important because users can post about personal fitness goals and achievements and other users comment and provide motivation or encouragement and adds a feeling of community to FitClub. 
+*  Solution?   Create a online forum on FitClub by using an opensource plug-in such as Simple-Press
+* Points?  Need to research how to allow users to post comments/upload photos and other users to reply directly to that post. 
