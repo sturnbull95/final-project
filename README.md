@@ -42,7 +42,7 @@ An Example List with Embedded Items:
 
 /list/create - homepage
 
-![homepage](documentation/homepage.png)
+![homepage](documentation/FitClub - Home Page.png)
 
 /list - page for showing account
 
