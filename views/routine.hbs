@@ -1,0 +1,15 @@
+<h1>
+  Add a New Workout!
+</h1>
+<link rel="stylesheet" href="{{css_file}}">
+<img src= "http://www.ymcansw.org.au/images/Facilities_Icons/422%20Website%20Icons%20grey-14.png" >
+<ol>
+{{#each routines as |routine|}}
+  <li> <a href="{{routine.slug}}"> {{routine.name}}</a></li>
+{{/each}}
+</ol>
+
+<form method="POST" action="/addRoutine">
+  Add Routine <input type="text" name="name">
+  <input type="submit" value="Add a Routine">
+</form>
