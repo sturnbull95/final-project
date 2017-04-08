@@ -84,7 +84,7 @@ app.get('/logout',function(req,res,next){
               }
             });
             req.logIn(user, function(err) {
-              res.render('index',{css_file:"/base.css",username:user.username});
+		res.redirect('/home');
             });
           }
           else{
@@ -103,7 +103,7 @@ app.post('/register', function(req, res) {
       return (err);
     }
     if (user) {
-        res.render('register',{message:'User Already Exists dumb-dumb',css_file:"/base.css"});
+        res.render('register',{message:req.body.username',css_file:"/base.css"});
     } else {
         if(req.body.password.length < 8){
         console.log('Not long enough');
