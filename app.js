@@ -36,7 +36,7 @@ const LocalStrategy = require('passport-local').Strategy
 var session = {};
 var User = mongoose.model('User');
 var Lists = mongoose.model('Lists');
-var bcrypt = require('bcrypt');
+var bcrypt = require('bcryptjs');
 passport.serializeUser(function(user, done) {
         done(null, user.id);
     });
@@ -103,7 +103,7 @@ app.post('/register', function(req, res) {
       return (err);
     }
     if (user) {
-        res.render('register',{message:'User Already Exists',css_file:"/base.css"});
+        res.render('register',{message:'User Already Exists dumb-dumb',css_file:"/base.css"});
     } else {
         if(req.body.password.length < 8){
         console.log('Not long enough');
@@ -142,9 +142,18 @@ app.post('/register', function(req, res) {
       name: req.body.name,
       workout: req.body.workout
     });
-    res.render('routine',{css_file:"/base.css",});
+	Lists.update({$addToSet:{lists:name}},function(err, doc) {
+      console.log("saving");
+      if(!err) {
+        res.render('routine',{css_file:"/base.css"});
+      } else {
+        res.send(err.errors.title.message);
+      }
+    });
   });
-
+app.get('/aboutMe',function(req,res){
+  res.render('about',{css_file:"/base.css"});
+});
 app.get('/',function(req,res){
   res.render('home',{css_file:"/base.css"});
 });
