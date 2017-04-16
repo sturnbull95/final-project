@@ -1,10 +1,8 @@
-// a taste of login! - express app demonstrating registration and login
-// express static setup
-
 var fs = require('fs');
 var express = require('express');
 var hbs = require('hbs');
 var expressSess = require("express-session");
+//var sleep = require('sleep');
 require('./db');
 var passport = require("passport");
 var mongoose = require('mongoose');
@@ -35,8 +33,7 @@ var Schema = mongoose.Schema;
 const LocalStrategy = require('passport-local').Strategy
 var session = {};
 var User = mongoose.model('User');
-var Lists = mongoose.model('Lists');
-var bcrypt = require('bcryptjs');
+var bcrypt = require('bcrypt');
 passport.serializeUser(function(user, done) {
         done(null, user.id);
     });
@@ -84,7 +81,7 @@ app.get('/logout',function(req,res,next){
               }
             });
             req.logIn(user, function(err) {
-		res.redirect('/home');
+              res.render('home',{css_file:"/base.css",username:user.username});
             });
           }
           else{
@@ -97,74 +94,60 @@ app.get('/logout',function(req,res,next){
       });
 
 app.post('/register', function(req, res) {
-User.findOne({'username':req.body.username},function(err, user) {
-    if (err){
-      console.log('Error in SignUp: '+err);
-      return (err);
-    }
-    if (user) {
-        res.render('register',{message:'User Already Exists',css_file:"/base.css"});
-    } else {
-        if(req.body.password.length < 8){
-        console.log('Not long enough');
-        res.render('register',{message:'Password needs to be at least 8 characters long!',css_file:"/base.css"});
-        }
-        else{
-          var newUser = new User();
-          newUser.username = req.body.username;
-          var pw = newUser.generateHash(req.body.password);
-          newUser.password = pw.hash;
-          newUser.pwSalt = pw.salt;
+  var user = req.body.username;
+  var pw = req.body.password;
 
-          newUser.save(function(err) {
-            if (err){
-              console.log('Error in Saving user: '+err);
-              throw err;
-            }
-            console.log('User Registration succesful');
-            res.render('home',{css_file:"/base.css",username:req.session.username});
-          });
-      req.session.regenerate((err) => {
-        if (!err) {
-          req.session.username = newUser.username;
-          req.session.password = newUser.password;
+  User.findOne({'username': user}, function(err, what){
+    if(!err) {
+        if(what != null) {
+            console.log("NO");
+            res.render('index', {error: ["User already exists"]});
+          } else if(pw.length < 8) {
+            console.log("NO");
+            res.render('index', {error: ["Password Length is too small"]});
         } else {
-          console.log('error');
-          res.send('an error occurred, please see the server logs for more information');
-        }
-      });
+
+            bcrypt.hash(pw, saltRounds, function(err, hash) {
+                // Store hash in your password DB.
+
+                  const newUser = new User({
+                    username:req.body.username,
+                    password:hash,
+                 });
+
+                  newUser.save(function(err, doc) {
+                   if(!err) {
+                    req.session.regenerate((err) => {
+                         if (!err) {
+                             req.session.username = newUser.username;
+                            console.log(req.session);
+                            console.log(newUser.username);
+                            //res.render('questions', {summoner: req.session.username});
+                          } else {
+                              console.log('error');
+                              res.send('an error occurred, please see the server logs for more information');
+                          }
+                    });
+                   } else {
+                           console.log(err);
+                      res.send(err);
+                   }
+                  })
+            });
+          }
+    } else {
+        console.log(err);
+              res.send(err);
     }
-    }
-    });
   });
-  app.post('/addRoutine',function(req,res){
-    const lists = new Lists({
-      name: req.body.name,
-      workout: req.body.workout
-    });
-	Lists.update({$addToSet:{lists:name}},function(err, doc) {
-      console.log("saving");
-      if(!err) {
-        res.render('routine',{css_file:"/base.css"});
-      } else {
-        res.send(err.errors.title.message);
-      }
-    });
+
   });
-app.get('/aboutMe',function(req,res){
-  res.render('about',{css_file:"/base.css"});
-});
+
 app.get('/',function(req,res){
   res.render('home',{css_file:"/base.css"});
 });
 app.get('/home',function(req,res){
   res.render('index',{css_file:"/base.css"});
-});
-app.get('/addRoutine',function(req,res){
-  res.render('routine',{css_file:"/base.css"});
-});
-app.get('/addWorkout',function(req,res){
-  res.render('workout',{css_file:"/base.css"});
 });
 
 app.get('/register',function(req,res){
