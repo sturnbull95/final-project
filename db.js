@@ -7,7 +7,7 @@ const URLSlugs = require('mongoose-url-slugs');
  var path = require('path');
  var fn = path.join(__dirname, 'config.json');
 
- var bcrypt = require('bcrypt');
+ var bcrypt = require('bcryptjs');
  if (process.env.NODE_ENV === 'PRODUCTION') {
   // if we're in PRODUCTION mode, then read the configration from a file
   // use blocking file io to do this...

@@ -97,13 +97,13 @@ app.get('/logout',function(req,res,next){
       });
 
 app.post('/register', function(req, res) {
-  User.findOne({'username':req.body.username},function(err, user) {
+User.findOne({'username':req.body.username},function(err, user) {
     if (err){
       console.log('Error in SignUp: '+err);
       return (err);
     }
     if (user) {
-        res.render('register',{message:req.body.username',css_file:"/base.css"});
+        res.render('register',{message:'User Already Exists',css_file:"/base.css"});
     } else {
         if(req.body.password.length < 8){
         console.log('Not long enough');
@@ -122,7 +122,7 @@ app.post('/register', function(req, res) {
               throw err;
             }
             console.log('User Registration succesful');
-            res.render('index',{css_file:"/base.css",username:req.session.username});
+            res.render('home',{css_file:"/base.css",username:req.session.username});
           });
       req.session.regenerate((err) => {
         if (!err) {
