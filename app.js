@@ -33,7 +33,7 @@ var Schema = mongoose.Schema;
 const LocalStrategy = require('passport-local').Strategy
 var session = {};
 var User = mongoose.model('User');
-var bcrypt = require('bcrypt');
+var bcrypt = require('bcryptjs');
 passport.serializeUser(function(user, done) {
         done(null, user.id);
     });
@@ -66,7 +66,13 @@ app.get('/logout',function(req,res,next){
   req.session.destroy();
   res.redirect('/');
 });
-
+app.post('/goodWorkout',function(req,res){
+  var myWorkout = req.body.workout;
+  var myTime = req.body.time;
+  if(myWorkout != null){
+	res.render('goodWorkout', {css_file:"/base.css",message: "All workouts are great!"});
+}
+});
   app.post('/login', function(req, res,next) {
       User.findOne({'username':req.body.username},function(err, user,count) {
       if(!err && user) {
@@ -81,7 +87,7 @@ app.get('/logout',function(req,res,next){
               }
             });
             req.logIn(user, function(err) {
-              res.render('home',{css_file:"/base.css",username:user.username});
+              res.render('index',{css_file:"/base.css",username:user.username});
             });
           }
           else{
@@ -107,7 +113,7 @@ app.post('/register', function(req, res) {
             res.render('index', {error: ["Password Length is too small"]});
         } else {
 
-            bcrypt.hash(pw, saltRounds, function(err, hash) {
+            bcrypt.hash(pw, 10, function(err, hash) {
                 // Store hash in your password DB.
 
                   const newUser = new User({
@@ -143,8 +149,12 @@ app.post('/register', function(req, res) {
 
   });
 
+
 app.get('/',function(req,res){
   res.render('home',{css_file:"/base.css"});
+});
+app.get('/aboutMe',function(req,res){
+  res.render('about',{css_file:"/base.css"});
 });
 app.get('/home',function(req,res){
   res.render('index',{css_file:"/base.css"});
@@ -155,6 +165,9 @@ app.get('/register',function(req,res){
 });
 app.get('/login',function(req,res){
   res.render('login',{css_file:"/base.css"});
+});
+app.get('/goodWorkout',function(req,res){
+  res.render('goodWorkout',{css_file:"/base.css"});
 });
 
 app.listen(process.env.PORT || 3000);
