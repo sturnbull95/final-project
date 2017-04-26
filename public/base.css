@@ -6,7 +6,7 @@ h1 {
     text-align: center;
 }
 
-img {
+.Icon {
     display: block;
     margin: auto;
     width: 10%;
@@ -56,6 +56,9 @@ label[for=workout]
 {
     margin-left:30%;
 }
+/*#picture{
+  display: inline-block;
+}*/
 #comntBtn{
   margin-left:45%;
 }
