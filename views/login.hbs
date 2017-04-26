@@ -4,9 +4,11 @@
 {{message}}
 <link rel="stylesheet" href="{{css_file}}">
 <form method="POST" action = "">
-    UserName<input type="text" name="username" id="username">
-    PassWord<input type="password" name="password">
-    <input type="submit" value = "Login" onclick = "getUser()">
+  <label for="username">Username:</label>
+    <input type="text" name="username" id="username"><br>
+    <label for="password">Password:</label>
+    <input type="password" name="password" id="password"><br>
+    <input type="submit" value = "Login" id="loginBtn" onclick = "getUser()">
 </form>
 
 <hr>
