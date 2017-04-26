@@ -3,14 +3,21 @@
 </h1>
 <link rel="stylesheet" href="{{css_file}}">
 <img src= "FitClubIcon.jpg">
-<ol>
-{{#each workouts as |workout|}}
-  <a href="{{workout.slug}}"> {{workout.workout}}</a>
-{{/each}}
-</ol>
+<body onload="addWorkout()">
+<table>
+	<thead>
+		<th>Workout</th>
+		<th>Time (minutes)</th>
+	</thead>
+	<tbody id="workout-list">
+	</tbody>
+</table>
 
-<form method="POST" action="/addWorkout">
-  Workout <input type="text" name="workout">
-  <input type="submit" value="Add a Workout">
-  <input type = "hidden" name = "slug" value = "{{workout.slug}}">
-</form>
+  <label for="workout">Workout:</label>
+  <input type="text" name="workout" id= "workout">
+  <label for="length">Duration:</label>
+  <input type="number" name="length" id= "length">
+  <br>
+  <input type="button" onclick = "createNew()" value="Add a Workout" id = "newBtn">
+  <p>Go <a href="/home">home</a>?</p>
+  <p><a href="/logout">Logout?</a></p>

@@ -27,14 +27,17 @@ const URLSlugs = require('mongoose-url-slugs');
 
 
 var Lists = new mongoose.Schema({
-	name: String,
-	workout: String
+	workout: String,
+  length: Number
 });
 var User = new mongoose.Schema({
-  username: String,
+  username: {type:String, unique:true},
   password: String,
-	pwSalt: String,
-  lists: [Lists]
+	pwSalt: String
+});
+var Comments = new mongoose.Schema({
+  user: String,
+	content: String
 });
 
 User.methods.generateHash = function(password) {
@@ -43,9 +46,10 @@ User.methods.generateHash = function(password) {
     console.log(salt);
     return {salt:salt, hash: bcrypt.hashSync(password, salt, null)};
 };
-
-Lists.plugin(URLSlugs('name'));
+//
+// Lists.plugin(URLSlugs('name'));
 mongoose.model('Lists', Lists);
 mongoose.model('User', User);
+mongoose.model('Comments', Comments);
 mongoose.Promise = global.Promise;
 mongoose.connect(dbconf);

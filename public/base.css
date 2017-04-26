@@ -1,5 +1,5 @@
 body {
-    background: linear-gradient(red,yellow);
+    background: red;
 }
 h1 {
     color: black;
@@ -12,13 +12,27 @@ img {
     width: 10%;
 }
 
-/*
-a {
-	font-weight: bold;
-	font-size: 20px;
-	margin-left: 45%;
+ table {
+	border-collapse: collapse;
+	margin: auto;
 }
- */
+
+td, th {
+	border: 1px solid #555;
+	text-align: left;
+	padding: 5px;
+}
+
+/* color every other row */
+tr:nth-child(2n) {
+	background-color: #eee;
+}
+
+th {
+	font-weight:bold;
+	background-color: #000;
+	color: #fff;
+}
 
 form {
     margin-left: 40%;
@@ -33,6 +47,20 @@ p{
 p1{
 	font-weight: bold;
 	font-size: 20px;
+}
+label[for=content]
+{
+    margin-left:40%;
+}
+label[for=workout]
+{
+    margin-left:30%;
+}
+#comntBtn{
+  margin-left:45%;
+}
+#newBtn{
+  margin-left:45%;
 }
 .myDiv {
     font-weight: bold;

@@ -33,6 +33,8 @@ var Schema = mongoose.Schema;
 const LocalStrategy = require('passport-local').Strategy
 var session = {};
 var User = mongoose.model('User');
+var Lists = mongoose.model('Lists');
+var Comments = mongoose.model('Comments');
 var bcrypt = require('bcryptjs');
 passport.serializeUser(function(user, done) {
         done(null, user.id);
@@ -99,62 +101,111 @@ app.post('/goodWorkout',function(req,res){
     });
       });
 
-app.post('/register', function(req, res) {
-  var user = req.body.username;
-  var pw = req.body.password;
+      app.post('/register', function(req, res) {
+        User.findOne({'username':req.body.username},function(err, user) {
+          if (err){
+            console.log('Error in SignUp: '+err);
+            return (err);
+          }
+          if (user) {
+              res.render('register',{message:'User Already Exists',css_file:"/base.css"});
+          } else {
+              if(req.body.password.length < 8){
+              console.log('Not long enough');
+              res.render('register',{message:'Password needs to be at least 8 characters long!',css_file:"/base.css"});
+              }
+              else{
+                var newUser = new User();
+                newUser.username = req.body.username;
+                var pw = newUser.generateHash(req.body.password);
+                newUser.password = pw.hash;
+                newUser.pwSalt = pw.salt;
 
-  User.findOne({'username': user}, function(err, what){
-    if(!err) {
-        if(what != null) {
-            console.log("NO");
-            res.render('index', {error: ["User already exists"]});
-          } else if(pw.length < 8) {
-            console.log("NO");
-            res.render('index', {error: ["Password Length is too small"]});
-        } else {
-
-            bcrypt.hash(pw, 10, function(err, hash) {
-                // Store hash in your password DB.
-
-                  const newUser = new User({
-                    username:req.body.username,
-                    password:hash,
-                 });
-
-                  newUser.save(function(err, doc) {
-                   if(!err) {
-                    req.session.regenerate((err) => {
-                         if (!err) {
-                             req.session.username = newUser.username;
-                            console.log(req.session);
-                            console.log(newUser.username);
-                            //res.render('questions', {summoner: req.session.username});
-                          } else {
-                              console.log('error');
-                              res.send('an error occurred, please see the server logs for more information');
-                          }
-                    });
-                   } else {
-                           console.log(err);
-                      res.send(err);
-                   }
-                  })
+                newUser.save(function(err) {
+                  if (err){
+                    console.log('Error in Saving user: '+err);
+                    throw err;
+                  }
+                  console.log('User Registration succesful');
+                  res.render('index',{css_file:"/base.css",username:req.session.username});
+                });
+            req.session.regenerate((err) => {
+              if (!err) {
+                req.session.username = newUser.username;
+                req.session.password = newUser.password;
+              } else {
+                console.log('error');
+                res.send('an error occurred, please see the server logs for more information');
+              }
             });
           }
-    } else {
-        console.log(err);
-              res.send(err);
-    }
-  });
-
-  });
+          }
+          });
+        });
 
 
 app.get('/',function(req,res){
   res.render('home',{css_file:"/base.css"});
 });
+app.get('/main.js',function(req,res){
+  res.sendFile(__dirname + '/main.js');
+});
+
+app.post('/api/workout', function(req, res) {
+  var bool = {true:true};
+  (new Lists({
+      workout: req.body.workout,
+      length: req.body.length
+  })).save(function(err, list, count) {
+    res.json(bool);
+  });
+});
+
+app.get('/api/workout',function(req,res){
+  Lists.find({},function(err,lists,count){
+    res.json(lists);
+  });
+});
+
+app.get('/api/comment',function(req,res){
+  Comments.find({},function(err,comments,count){
+    res.json(comments);
+  });
+});
+
+app.get('/workout',function(req,res){
+  Lists.find({},{workout: 1, length: 1},function(err,lists,count){
+    console.log(lists);
+    res.render('workout',{css_file:"/base.css"});
+  });
+});
+
+app.post('/api/comment', function(req,res){
+  var bool = {true:true};
+  console.log(req.session.username);
+  (new Comments({
+      content: req.body.content,
+      user:req.session.username
+  })).save(function(err, list, count) {
+    res.json(bool);
+  });
+});
+
+app.get('/logout',function(req,res,next){
+  req.session.destroy();
+  res.redirect('/');
+});
+
 app.get('/aboutMe',function(req,res){
   res.render('about',{css_file:"/base.css"});
+});
+app.get('/comments',function(req,res){
+  if(!req.session.username){
+    res.redirect('login');
+  }
+  else{
+    res.render('comments',{css_file:"/base.css"});
+  }
 });
 app.get('/home',function(req,res){
   res.render('index',{css_file:"/base.css"});
@@ -165,9 +216,6 @@ app.get('/register',function(req,res){
 });
 app.get('/login',function(req,res){
   res.render('login',{css_file:"/base.css"});
-});
-app.get('/goodWorkout',function(req,res){
-  res.render('goodWorkout',{css_file:"/base.css"});
 });
 
 app.listen(process.env.PORT || 3000);

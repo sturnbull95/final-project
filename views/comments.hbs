@@ -1,0 +1,21 @@
+<h1>
+  Let Everyone Know What's Up!
+</h1>
+<link rel="stylesheet" href="{{css_file}}">
+<body onload="listComment()">
+<img src= "FitClubIcon.jpg">
+<table>
+	<thead>
+		<th>User</th>
+		<th>Comment</th>
+	</thead>
+	<tbody id="comment-list">
+	</tbody>
+</table>
+
+<label for="content">Add Comment:</label>
+<input type="text" name="name" id="content"><br>
+<input type="button" onclick = "addComment()" id="comntBtn" value="Add a Comment">
+
+<p>Go <a href="/home">home</a>?</p>
+<p><a href="/logout">Logout</a>?</p>
