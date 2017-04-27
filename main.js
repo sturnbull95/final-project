@@ -19,13 +19,10 @@ function addWorkout(){
   req.open('GET', 'http://'+notLocal+'/api/workout', true);
   req.onreadystatechange = function(){
     if (req.status >= 200 && req.status < 400){
-        console.log(this.responseText);
       var jObj = JSON.parse(this.responseText);
-      console.log(jObj);
       var movList = document.getElementById("workout-list");
       movList.innerHTML = "";
       for(itr in jObj){
-          console.log(jObj[itr].userWork);
         if(jObj[itr].length >= 60){
           movList.innerHTML += "<tr> <td>" + jObj[itr].workout + "</td> <td> " + jObj[itr].length + "</td><td><img id=picture src=http://www.clipartkid.com/images/660/gold-star-clip-art-twdWEg-clipart.jpg width=20 height=20></td></tr>";
         }else{
