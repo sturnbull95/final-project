@@ -28,7 +28,8 @@ const URLSlugs = require('mongoose-url-slugs');
 
 var Lists = new mongoose.Schema({
 	workout: String,
-  length: Number
+  length: Number,
+  user: String
 });
 var User = new mongoose.Schema({
   username: {type:String, unique:true},
