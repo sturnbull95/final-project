@@ -163,7 +163,7 @@ app.post('/api/workout', function(req, res) {
 });
 
 app.get('/api/workout',function(req,res){
-  Lists.find({user:req.session.username},function(err,lists,count){
+  Lists.find(req.session.username,function(err,lists,count){
     res.json(lists);
   });
 });
@@ -176,7 +176,7 @@ app.get('/api/comment',function(req,res){
 
 app.get('/workout',function(req,res){
   console.log(req.session.username);
-  Lists.find({user:req.session.username},{workout: 1, length: 1, user: 1},function(err,lists,count){
+  Lists.find({user:req.session.username},function(err,lists,count){
     console.log(lists);
     res.render('workout',{css_file:"/base.css",user:req.session.username});
   });
