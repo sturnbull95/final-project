@@ -156,7 +156,7 @@ app.post('/api/workout', function(req, res) {
   (new Lists({
       workout: req.body.workout,
       length: req.body.length,
-      userWork:req.session.username
+      user:req.session.username
   })).save(function(err, list, count) {
     res.json(bool);
   });
