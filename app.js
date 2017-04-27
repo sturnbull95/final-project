@@ -158,6 +158,7 @@ app.post('/api/workout', function(req, res) {
       length: req.body.length,
       user:req.session.username
   })).save(function(err, list, count) {
+
     res.json(bool);
   });
 });
