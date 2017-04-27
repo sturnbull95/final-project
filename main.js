@@ -2,6 +2,10 @@ var req = new XMLHttpRequest();
 var direction = "";
 var local = 'localhost:3000';
 var notLocal = "linserv2.cims.nyu.edu:20244";
+var user = "";
+
+function getUser(){
+    user = document.getElementById("username").value;
 
 function clearCommentField() {
     document.getElementById("content").value="";
@@ -74,6 +78,7 @@ function createNew(){
   req.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
   var workout = document.getElementById('workout').value;
   var length = document.getElementById('length').value;
+  var userWork = user;
   req.onreadystatechange = function(){
     if (req.status >= 200 && req.status < 400){
       var jObj = JSON.parse(this.responseText);
@@ -87,5 +92,5 @@ function createNew(){
     }
   }
   clearAddRoutineField();
-  req.send("workout="+workout+"&length="+length);
+  req.send("workout="+workout+"&length="+length+"&userWork="+userWork);
 }
