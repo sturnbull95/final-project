@@ -16,7 +16,7 @@ function addWorkout(){
   req.onreadystatechange = function(){
     if (req.status >= 200 && req.status < 400){
       var jObj = JSON.parse(this.responseText);
-      console.log(jObj);
+      console.log(jObj + " hi");
       var movList = document.getElementById("workout-list");
       movList.innerHTML = "";
       for(itr in jObj){
@@ -37,6 +37,7 @@ function listComment(){
   req.onreadystatechange = function(){
     if (req.status >= 200 && req.status < 400){
       var jObj = JSON.parse(this.responseText);
+        console.log(jObj + " ugh");
       var movList = document.getElementById("comment-list");
       movList.innerHTML = "";
       for(itr in jObj){
