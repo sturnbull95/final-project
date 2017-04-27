@@ -3,9 +3,7 @@ var direction = "";
 var local = 'localhost:3000';
 var notLocal = "linserv2.cims.nyu.edu:20244";
 var user = "";
-function getUser(){
-    return document.getElementById("username");
-}
+
 
 function clearCommentField() {
     document.getElementById("content").value="";
@@ -77,7 +75,6 @@ function createNew(){
   var length = document.getElementById('length').value;
   req.onreadystatechange = function(){
     if (req.status >= 200 && req.status < 400){
-        console.log(getUser());
       var jObj = JSON.parse(this.responseText);
       if(jObj.true){
         console.log("Save Successful");
