@@ -155,14 +155,15 @@ app.post('/api/workout', function(req, res) {
   var bool = {true:true};
   (new Lists({
       workout: req.body.workout,
-      length: req.body.length
+      length: req.body.length,
+      user:req.session.username
   })).save(function(err, list, count) {
     res.json(bool);
   });
 });
 
 app.get('/api/workout',function(req,res){
-  Lists.find({},function(err,lists,count){
+  Lists.find({user:req.session.username},function(err,lists,count){
     res.json(lists);
   });
 });
@@ -174,7 +175,8 @@ app.get('/api/comment',function(req,res){
 });
 
 app.get('/workout',function(req,res){
-  Lists.find({},{workout: 1, length: 1},function(err,lists,count){
+  console.log(req.session.username);
+  Lists.find({user:req.session.username},function(err,lists,count){
     console.log(lists);
     res.render('workout',{css_file:"/base.css"});
   });
