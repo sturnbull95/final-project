@@ -163,7 +163,7 @@ app.post('/api/workout', function(req, res) {
 });
 
 app.get('/api/workout',function(req,res){
-  Lists.find(req.session.username,function(err,lists,count){
+  Lists.find({},function(err,lists,count){
     res.json(lists);
   });
 });
@@ -175,16 +175,11 @@ app.get('/api/comment',function(req,res){
 });
 
 app.get('/workout',function(req,res){
-  console.log(req.session.username);
-  Lists.find({user:req.session.username},function(err,lists,count){
-    console.log(lists);
-    res.render('workout',{css_file:"/base.css",user:req.session.username});
-  });
+    res.render('workout',{css_file:"/base.css"});
 });
 
 app.post('/api/comment', function(req,res){
   var bool = {true:true};
-  console.log(req.session.username);
   (new Comments({
       content: req.body.content,
       user:req.session.username
