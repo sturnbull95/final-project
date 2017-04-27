@@ -68,13 +68,7 @@ app.get('/logout',function(req,res,next){
   req.session.destroy();
   res.redirect('/');
 });
-app.post('/goodWorkout',function(req,res){
-  var myWorkout = req.body.workout;
-  var myTime = req.body.time;
-  if(myWorkout != null){
-	res.render('goodWorkout', {css_file:"/base.css",message: "All workouts are great!"});
-}
-});
+
   app.post('/login', function(req, res,next) {
       User.findOne({'username':req.body.username},function(err, user,count) {
       if(!err && user) {
