@@ -6,6 +6,7 @@ var user = "";
 
 function getUser(){
     user = document.getElementById("username").value;
+}
 
 function clearCommentField() {
     document.getElementById("content").value="";
