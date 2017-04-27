@@ -12,10 +12,11 @@ function clearAddRoutineField() {
 }
 
 function addWorkout(){
-  req.open('GET', 'http://'+notLocal+'/api/workout', true);
+  req.open('GET', 'http://'+local+'/api/workout', true);
   req.onreadystatechange = function(){
     if (req.status >= 200 && req.status < 400){
       var jObj = JSON.parse(this.responseText);
+      console.log(jObj);
       var movList = document.getElementById("workout-list");
       movList.innerHTML = "";
       for(itr in jObj){
@@ -31,7 +32,7 @@ function addWorkout(){
 }
 
 function listComment(){
-  req.open('GET', 'http://'+notLocal+'/api/comment', true);
+  req.open('GET', 'http://'+local+'/api/comment', true);
   req.onreadystatechange = function(){
     if (req.status >= 200 && req.status < 400){
       var jObj = JSON.parse(this.responseText);
@@ -46,7 +47,7 @@ function listComment(){
 }
 
 function addComment(){
-  req.open('POST', 'http://'+notLocal+'/api/comment', true);
+  req.open('POST', 'http://'+local+'/api/comment', true);
   req.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
   var content = document.getElementById('content').value;
   req.onreadystatechange = function(){
@@ -67,7 +68,7 @@ function addComment(){
 
 
 function createNew(){
-  req.open('POST', 'http://'+notLocal+'/api/workout', true);
+  req.open('POST', 'http://'+local+'/api/workout', true);
   req.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
   var workout = document.getElementById('workout').value;
   var length = document.getElementById('length').value;
