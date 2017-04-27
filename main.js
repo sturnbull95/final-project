@@ -22,9 +22,9 @@ function addWorkout(){
       for(itr in jObj){
         console.log(jObj[itr].user);
         if(jObj[itr].length >= 60){
-          movList.innerHTML += "<tr> <td>" + jObj[itr].user + "</td> <td> " + jObj[itr].workout + "</td> <td> " + jObj[itr].length + "</td><td><img id=picture src=http://www.clipartkid.com/images/660/gold-star-clip-art-twdWEg-clipart.jpg width=20 height=20></td></tr>";
+          movList.innerHTML += "<tr> <td>" + jObj[itr].workout + "</td> <td> " + jObj[itr].length + "</td><td><img id=picture src=http://www.clipartkid.com/images/660/gold-star-clip-art-twdWEg-clipart.jpg width=20 height=20></td></tr>";
         }else{
-          movList.innerHTML += "<tr> <td>" + jObj[itr].user + "</td> <td> " + jObj[itr].workout + "</td> <td> " + jObj[itr].length + "</td></tr>";
+          movList.innerHTML += "<tr> <td>" + jObj[itr].workout + "</td> <td> " + jObj[itr].length + "</td></tr>";
         }
       }
     }
