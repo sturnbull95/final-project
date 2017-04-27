@@ -80,9 +80,9 @@ function createNew(){
   var workout = document.getElementById('workout').value;
   var length = document.getElementById('length').value;
   var userWork = user;
-    console.log(userWork);
   req.onreadystatechange = function(){
     if (req.status >= 200 && req.status < 400){
+        console.log(userWork);
       var jObj = JSON.parse(this.responseText);
       if(jObj.true){
         console.log("Save Successful");
