@@ -15,6 +15,7 @@ function addWorkout(){
   req.open('GET', 'http://'+notLocal+'/api/workout', true);
   req.onreadystatechange = function(){
     if (req.status >= 200 && req.status < 400){
+        console.log(this.responseText);
       var jObj = JSON.parse(this.responseText);
       console.log(jObj);
       var movList = document.getElementById("workout-list");
