@@ -153,12 +153,12 @@ app.get('/main.js',function(req,res){
 
 app.post('/api/workout', function(req, res) {
   var bool = {true:true};
+	console.log(req.session.username);
   (new Lists({
       workout: req.body.workout,
       length: req.body.length,
       user:req.session.username
   })).save(function(err, list, count) {
-	console.log(req.session.username);
     res.json(bool);
   });
 });
